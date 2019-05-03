@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/tes', function () {
+    return view('front.index');
+});
+Route::get('/tes2', function () {
+    return view('front.register');
+});
 
 Auth::routes();
 
