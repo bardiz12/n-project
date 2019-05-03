@@ -63,20 +63,17 @@
                 </div>
             </div>
         </section>
-        @yield('content')        
-        <section id="banner">
-            <div class="bg"></div>
-            <div class="bg2">
-               <h1>N-Project Survey Generator</h1>  
-            </div>
-        </section>
-        <section id="button">
-            <div class="wrap" style="text-align:center;">
-                <a href="/register"><button class="btn btn-primary btn-lg">Register</button></a>
-                <a href="/login"><button class="btn btn-success btn-lg">Login</button></a>
-            </div>
-        </section>
+        <div id="contents">
+
+
+         @yield('content')        
+        </div>
     </div>
+    <footer>
+        <div class="wrap">
+            <h4>Copyright &copy; Rombel 1 Ilkom UNNES</h4> 
+        </div>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -89,6 +86,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    @stack('scripts')
 </body>
 
 </html>
