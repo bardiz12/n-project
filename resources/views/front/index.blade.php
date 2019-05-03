@@ -11,8 +11,8 @@
 </section>
 <section id="button">
     <div class="wrap" style="text-align:center;">
-        <a href="/register"><button class="btn btn-primary btn-lg">Register</button></a>
-        <a href="/login"><button class="btn btn-success btn-lg">Login</button></a>
+        <a href="/register"><button class="btn btn-primary btn-lg"><i class="fa fa-plus "></i> Register</button></a>
+        <a href="/login"><button class="btn btn-success btn-lg"><i class="fa fa-key "></i> Login</button></a>
     </div>
 </section>
 @endsection

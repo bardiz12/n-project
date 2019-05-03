@@ -31,19 +31,19 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="#">Survey </a>
+                                    <a href="#"><i class="fa fa-poll-h "></i> Survey </a>
                                 </li>
                                 <li>
-                                    <a href="#"> Maps</a>
+                                    <a href="#"><i class="fa fa-map "></i> Maps</a>
                                 </li>
                                 <li>
-                                    <a href="#"> Dashboard</a>
+                                    <a href="#"><i class="fa fa-tachometer-alt "></i>  Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="#"> Manage</a>
+                                    <a href="#"><i class="fa fa-cog "></i> Manage</a>
                                 </li>
                                 <li>
-                                    <a href="#"> Issue</a>
+                                    <a href="#"><i class="fa fa-exclamation-circle "></i>  Issue</a>
                                 </li>
                             </ul>
                         </nav>

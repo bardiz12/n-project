@@ -12,13 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/tes', function () {
     return view('front.index');
 });
+Route::get('/tes', function () {
+
+});
 Route::get('/tes2', function () {
-    return view('front.register');
+    return view('front.login');
 });
 
 Auth::routes();
