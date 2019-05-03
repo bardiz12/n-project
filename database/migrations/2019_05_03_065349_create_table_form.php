@@ -17,7 +17,8 @@ class CreateTableForm extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longtext('description');
-            $table->longtext('columns');
+            $table->longtext('column_name');
+            $table->longtext('column_detail');
             $table->string('creator_id');
             $table->timestamps();
         });
