@@ -24,3 +24,4 @@ Route::get('/tes2', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/survey/buat','SurveyController@buat')->name('survey.create');
