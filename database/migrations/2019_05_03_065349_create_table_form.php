@@ -17,10 +17,11 @@ class CreateTableForm extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longtext('description');
-            $table->longtext('column_name');
-            $table->longtext('column_detail');
+/*            $table->json('column_name');
+            $table->json('column_detail');*/
             $table->string('creator_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

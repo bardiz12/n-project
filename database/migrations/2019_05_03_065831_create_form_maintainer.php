@@ -17,7 +17,10 @@ class CreateFormMaintainer extends Migration
             $table->bigIncrements('id');
             $table->integer('form_id');
             $table->integer('users_id');
+            $table->integer('maintainer_roles_id');
+            $table->integer('status');
             $table->integer('added_by');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

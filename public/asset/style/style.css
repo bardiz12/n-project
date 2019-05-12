@@ -90,3 +90,26 @@ body{
     width: 80%;
     margin: 0 auto;
 }
+
+.survey-form-container .judul-pertanyaan a span {
+    padding-left: 2px;
+    display: none;
+}
+
+.survey-form-container .judul-pertanyaan a{
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.survey-form-container .judul-pertanyaan {
+    margin-bottom: 5px;
+}
+
+.survey-form-container .judul-pertanyaan button{
+    margin-left: 5px;
+}
+
+.survey-form-container .judul-pertanyaan a:hover span {
+    display: inherit;
+}
+

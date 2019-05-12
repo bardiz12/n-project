@@ -27,4 +27,10 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/survey/buat','SurveyController@buat')->name('survey.create');
+
+Route::group(['prefix' => 'survey','as'=>'survey.','middleware'=>['auth']], function () {
+    Route::get('/create','SurveyController@buat')->name('create');
+    Route::post('/save','SurveyController@store')->name('store');
+    Route::get('/write/{id}','SurveyController@write')->name('write')->middleware(['formAccess.write']);
+    Route::post('/write/{id}/save','SurveyController@saveWrite')->name('write.save')->middleware(['formAccess.write']);
+});

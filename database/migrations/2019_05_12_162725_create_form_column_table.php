@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableFormContent extends Migration
+class CreateFormColumnTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTableFormContent extends Migration
      */
     public function up()
     {
-        Schema::create('form_content', function (Blueprint $table) {
+        Schema::create('form_column', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('form_id');
-            $table->json('content');
-            $table->integer('users_id');
+            $table->string('name');
+            $table->longtext('pertanyaan');
+            $table->string('type');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,6 @@ class CreateTableFormContent extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_form_content');
+        Schema::dropIfExists('form_column');
     }
 }
