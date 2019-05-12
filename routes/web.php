@@ -20,6 +20,9 @@ Route::get('/tes', function () {
 Route::get('/tes2', function () {
     return view('front.login');
 });
+Route::get('/admin', function () {
+    return view('layouts.admin');
+});
 
 Auth::routes();
 
