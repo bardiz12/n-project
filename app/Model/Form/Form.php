@@ -21,4 +21,19 @@ class Form extends Model
     {
         return $this->hasMany('App\Model\Form\Column', 'form_id', 'id');
     }
+
+    public function maintainer()
+    {
+        return $this->belongsToMany('App\User', 'form_maintainer', 'form_id', 'users_id')->where('status',1)->whereIn('maintainer_roles_id',[1,2]);
+    }
+
+    public function link(){
+        return route('survey.write',[$this->id]);
+    }
+
+    public function content()
+    {
+        return $this->hasMany('App\Model\Form\Content', 'form_id', 'id');
+    }
+    
 }

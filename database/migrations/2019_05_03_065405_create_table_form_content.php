@@ -18,6 +18,8 @@ class CreateTableFormContent extends Migration
             $table->integer('form_id');
             $table->json('content');
             $table->integer('users_id');
+            $table->float('long');
+            $table->float('lat');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -17,9 +17,8 @@ class CreateTableForm extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longtext('description');
-/*            $table->json('column_name');
-            $table->json('column_detail');*/
             $table->string('creator_id');
+            $table->boolean('is_public')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

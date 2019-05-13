@@ -65,7 +65,7 @@
                 </div>
             </div>
         </section>
-        <div id="contents" class="mt-5">
+        <div id="contents">
 
          @yield('content')        
         </div>

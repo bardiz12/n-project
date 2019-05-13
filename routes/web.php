@@ -33,4 +33,10 @@ Route::group(['prefix' => 'survey','as'=>'survey.','middleware'=>['auth']], func
     Route::post('/save','SurveyController@store')->name('store');
     Route::get('/write/{id}','SurveyController@write')->name('write')->middleware(['formAccess.write']);
     Route::post('/write/{id}/save','SurveyController@saveWrite')->name('write.save')->middleware(['formAccess.write']);
+    Route::get('/maintainer/{id}','SurveyController@maintainerIndex')->name('maintainer.index')->middleware(['formAccess.admin']);
+});
+
+Route::group(['prefix' => 'account','as'=>'account.','middleware'=>['auth']],function(){
+    Route::get('/','AccountController@index')->name('index');
+    Route::get('/surveys','AccountController@surveysIndex')->name('surveys');
 });

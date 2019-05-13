@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'formAccess.write' => \App\Http\Middleware\hasFormWriteAccess::class,
+        'formAccess.admin' => \App\Http\Middleware\formAdminAccess::class
     ];
 
     /**

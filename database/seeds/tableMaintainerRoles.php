@@ -13,7 +13,7 @@ class tableMaintainerRoles extends Seeder
      */
     public function run()
     {
-        $roles = ['Maintainer','Member'];
+        $roles = ['Creator','Maintainer','Member'];
         $faker = Faker::create('id_ID');
         array_map(function($role) use ($faker){
             MaintainerRoles::create([

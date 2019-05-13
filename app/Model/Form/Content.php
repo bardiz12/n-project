@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Content extends Model
 {
     protected $table = 'form_content';
-    protected $fillable = ['form_id','content','users_id'];
+    protected $fillable = ['form_id','content','users_id','long','lat'];
     protected $casts = [
         'content' => 'array',
     ];

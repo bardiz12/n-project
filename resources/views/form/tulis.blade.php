@@ -1,8 +1,9 @@
 @extends('index')
 
 @include('plugins.ajax-form')
+@include('plugins.geolocation')
 @section('content')
-    <div class="container">
+    <div class="container mt-2">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -20,6 +21,8 @@
             
             <div class="col-md-12 mt-2">
                 <form action="{{route('survey.write.save',[$form->id])}}" data-form-ajax='true' data-reset='true'>
+                    <input type="hidden" name="geolocation[lat]" value="" id="geo-lat">
+                    <input type="hidden" name="geolocation[long]" value="" id="geo-long">
                     <div class="card">
                         <div class="card-header">Formulir Pertanyaan</div>
                         <div class="card-body">
@@ -82,3 +85,60 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+
+    $(document).ready(function(ev){
+        function loadingLocation(){
+                loaderLocation = Swal.fire({
+                allowOutsideClick: false,
+                title: 'Detecting Location!',
+                html: 'this popup will closed until your location is detected<br/><span id="location-loader"></span>',
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+                });
+        }
+
+        function changePos(position){
+            console.log(position);
+            $("form #geo-lat").val(position.coords.latitude);
+            $("form #geo-long").val(position.coords.longitude);
+            
+            $("#location-loader").html("location detected ! : " + position.coords.latitude + ', ' + position.coords.longitude);
+            messs = loaderLocation;
+            var interVal = setTimeout(function(){
+                try {
+                    Swal.close();
+                } catch (error) {
+                    //console.log(error.message);  
+                }
+                clearTimeout(interVal);
+            },1000);
+        }
+
+        function errorPos(error){
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+                case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+                case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+                case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+            }
+        }
+
+        loadingLocation();
+        getLocation(changePos, errorPos);
+        
+        var geoWatcher = navigator.geolocation.watchPosition(changePos, errorPos, null);
+    });
+</script>
+@endpush

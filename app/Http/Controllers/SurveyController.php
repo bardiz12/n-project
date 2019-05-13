@@ -46,12 +46,14 @@ class SurveyController extends Controller
                 }
             })(); 
         }
+        $rules['geolocation.lat'] = 'required|numeric'; 
+        $rules['geolocation.long'] = 'required|numeric';
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json([
                 'status'=>'error',
                 'title'=>'Error!',
-                'html'=>Alert::errorList($validator->errors())
+                'msg'=>Alert::errorList($validator->errors())
             ], 200, $headers);   
         }
         $rules2 = [];
@@ -67,7 +69,7 @@ class SurveyController extends Controller
                         return response()->json([
                             'status'=>'error',
                             'title'=>'Error!',
-                            'html'=>'Pilihan jawaban untuk kolom ke-'.($key+1)." tidak ditemukan"
+                            'msg'=>'Pilihan jawaban untuk kolom ke-'.($key+1)." tidak ditemukan"
                         ], 200, $headers);   
                     }
                 }
@@ -76,14 +78,17 @@ class SurveyController extends Controller
         }
         $konten = Content::create([
             'form_id'=>$id,
-            'content'=>json_encode($answer),
-            'users_id'=>Auth::user()->id
+            'content'=>$answer,
+            'users_id'=>Auth::user()->id,
+            'long'=>$request->input('geolocation')['long'],
+            'lat'=>$request->input('geolocation')['lat'],
         ]);
 
-        dd($konten->toArray());
-
-
-        
+        return response()->json([
+            'status'=>'success',
+            'title'=>'Berhasil Menambahkan',
+            'msg'=>'Pilihan jawaban untuk kolom ke-'.($key+1)." tidak ditemukan"
+        ], 200, $headers);   
     }
 
     public function store(Request $request){
@@ -103,7 +108,7 @@ class SurveyController extends Controller
             return response()->json([
                 'status'=>'error',
                 'title'=>'Error!',
-                'html'=>Alert::errorList($validate->errors()->all())
+                'msg'=>Alert::errorList($validate->errors())
             ], 200, $headers);   
         }
         
@@ -114,19 +119,30 @@ class SurveyController extends Controller
         if(!(count($types) === count($ids) && count($ids) === count($pertanyaans))){
             return response()->json([
                 'status'=>'error',
-                'html'=>'Form tidak valid',
+                'msg'=>'Form tidak valid',
                 'title'=>'Error!'
             ], 200, $headers);
         }
 
+
+        $calon_id = [];
         foreach ($types as $key => $value) {
+            $calon_id[] = $ids[$key];
             if(!in_array($value,$this->allowed_column_types)){
                 return response()->json([
                     'status'=>'error',
-                    'html'=>'Jenis pertanyaan '.$value.' tidak ada',
+                    'msg'=>'Jenis pertanyaan '.$value.' tidak ada',
                     'title'=>'Error!'
                 ], 200, $headers);
             }
+        }
+
+        if(count(array_unique($calon_id)) !== count($calon_id)){
+            return response()->json([
+                'status'=>'warning',
+                'msg'=>'ID pertanyaan harus unique!',
+                'title'=>'Warning!'
+            ], 200, $headers);
         }
 
         $id_pertanyaan = [];
@@ -152,5 +168,11 @@ class SurveyController extends Controller
                 }
             }
         }
+    }
+
+    public function maintainerIndex($id){
+        $data = [];
+        $data['form'] = request()->get('theForm');
+        return view('account.survey.manage.user',$data);
     }
 }

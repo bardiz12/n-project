@@ -11,45 +11,47 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <form method="POST" action="{{route('survey.store')}}" data-form-ajax='true' data-reset='true'>
-                    <div class="card">
-                            <div class="card-header">Buat Survey Baru</div>
-            
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">Nama Survey</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nama Survey" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Deskripsi Survey</label>
-                                    <textarea class="form-control" id="description" name="description" placeholder="Nama Survey" required></textarea>
-                                </div>
-                                
-                                
-                                <div id="kolom">
-                                    
-                                </div>
-                                <div class="form-group text-right">
-                                    <div class="d-flex justify-content-between">
-                                            <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Tambah Pertanyaan
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="btn-add-group">
-                                                        <button data-type="text" class="dropdown-item" type="button">Text</button>
-                                                        <button data-type="textarea" class="dropdown-item" type="button">Textarea</button>
-                                                        <button data-type="checkbox"  class="dropdown-item" type="button">Checkbox</button>
-                                                        <button data-type="radio" class="dropdown-item" type="button">Radio button</button>
-                                                        <button data-type="select" class="dropdown-item" type="button">Select</button>
-                                                    </div>
-                                                </div>
-            
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                    <fieldset>
+                            <div class="card">
+                                    <div class="card-header">Buat Survey Baru</div>
+                    
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="name">Nama Survey</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Nama Survey" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Deskripsi Survey</label>
+                                            <textarea class="form-control" id="description" name="description" placeholder="Nama Survey" required></textarea>
+                                        </div>
+                                        
+                                        
+                                        <div id="kolom">
+                                            
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <div class="d-flex justify-content-between">
+                                                    <div class="dropdown">
+                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Tambah Pertanyaan
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="btn-add-group">
+                                                                <button data-type="text" class="dropdown-item" type="button">Text</button>
+                                                                <button data-type="textarea" class="dropdown-item" type="button">Textarea</button>
+                                                                <button data-type="checkbox"  class="dropdown-item" type="button">Checkbox</button>
+                                                                <button data-type="radio" class="dropdown-item" type="button">Radio button</button>
+                                                                <button data-type="select" class="dropdown-item" type="button">Select</button>
+                                                            </div>
+                                                        </div>
+                    
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </div>
+                                            
+                    
                                     </div>
-                                </div>
-                                    
-            
                             </div>
-                        </div>
+                    </fieldset>
             </form>
         </div>
     </div>
