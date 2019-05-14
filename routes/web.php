@@ -31,12 +31,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'survey','as'=>'survey.','middleware'=>['auth']], function () {
     Route::get('/create','SurveyController@buat')->name('create');
     Route::post('/save','SurveyController@store')->name('store');
-    Route::get('/write/{id}','SurveyController@write')->name('write')->middleware(['formAccess.write']);
-    Route::post('/write/{id}/save','SurveyController@saveWrite')->name('write.save')->middleware(['formAccess.write']);
-    Route::get('/maintainer/{id}','SurveyController@maintainerIndex')->name('maintainer.index')->middleware(['formAccess.admin']);
+    Route::get('/{id}/response/','SurveyController@write')->name('write')->middleware(['formAccess.write']);
+    Route::group(['prefix' => 'report','middleware'=>['formAccess.admin']], function () {
+
+    });
+    Route::post('/{id}/response/save','SurveyController@saveWrite')->name('write.save')->middleware(['formAccess.write']);
 });
 
 Route::group(['prefix' => 'account','as'=>'account.','middleware'=>['auth']],function(){
     Route::get('/','AccountController@index')->name('index');
+    Route::group(['prefix' => 'survey','as'=>'survey.'], function () {
+        Route::get('/{id}/maintainer','SurveyController@maintainerIndex')->name('maintainer.index')->middleware(['formAccess.admin']);
+        Route::post('/{id}/maintainer/promotion','SurveyController@maintainerPromotion')->name('maintainer.promotion')->middleware(['formAccess.admin']);
+        Route::post('/{id}/maintainer/add','SurveyController@maintainerAdd')->middleware(['formAccess.admin'])->name('maintainer.add');
+        Route::group(['prefix'=>'{id}/report','as'=>'report'],function(){
+            Route::get('/new','SurveyReportController@create');
+        });
+    });
     Route::get('/surveys','AccountController@surveysIndex')->name('surveys');
+    
 });

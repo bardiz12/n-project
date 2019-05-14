@@ -7,7 +7,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Informasi Survey</div>
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <span>Informasi Survey</span>
+                            <span>s</span>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-start">
                             <h5 class="display-5">Name :&nbsp</h5>

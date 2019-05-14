@@ -13,7 +13,11 @@
                                 <h5 class="card-title">{{$survey->name}}</h5>
                                     <h6 class="card-subtitle mb-2">
                                     <div class="d-flex justify-content-between">
-                                            <span class="badge badge-{{$warna[$survey->pivot->maintainer_roles_id]}}">{{$maintainer_roles[$survey->pivot->maintainer_roles_id]['name']}}</span> 
+                                            <div class="small">
+                                                    @foreach ($survey->getFormUserRoleData() as $r)
+                                                    {!! $r->badge() !!}
+                                                @endforeach
+                                            </div>
                                             <small class="text-muted">{{$survey->content->count()}} Responden</small>
                                     </div>
                                     </h6>

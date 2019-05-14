@@ -20,5 +20,7 @@ class Content extends Model
     public function user()
     {
         return $this->hasOne('App\User', 'id', 'users_id');
+
+        $a = Content::whereJsonContains('content->6',["5"])->count();
     }
 }

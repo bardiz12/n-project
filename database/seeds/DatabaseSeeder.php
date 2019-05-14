@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(FormColumnTableSeeder::class);
         $this->call(FormColumnPilganTableSeeder::class);
         $this->call(FormContentTableSeeder::class);
+
+        $this->call(seedContohContentForm::class);
+
+        $this->call(seedDashboardElement::class);
     }
 }

@@ -15,7 +15,7 @@ class AccountController extends Controller
 
     public function surveysIndex(){
         $data = [];
-        $data['surveys'] = Auth::user()->formAdmin;
+        $data['surveys'] = Auth::user()->formAdmin()->paginate(5);
         $data['warna'] = ['','warning','danger','primary'];
         $maintainer_roles = [];
         array_map(function($data) use (&$maintainer_roles){

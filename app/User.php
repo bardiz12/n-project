@@ -44,6 +44,7 @@ class User extends Authenticatable
     
     public function formAdmin()
     {
-        return $this->belongsToMany('App\Model\Form\Form', 'form_maintainer', 'users_id', 'form_id')->where('status',1)->withPivot('maintainer_roles_id', 'status','added_by');
+        return $this->belongsToMany('App\Model\Form\Form', 'form_maintainer', 'users_id', 'form_id')->where('status',1)->withPivot('maintainer_roles_id', 'status','added_by')->groupBy('form_id');
     }
+
 }

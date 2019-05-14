@@ -2,6 +2,7 @@
 
 namespace App\Model\Form;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,6 +12,7 @@ class Form extends Model
 
     protected $table = 'form';
     protected $fillable = ['name','description','creator_id'];
+    private static $formUserRoleData = null;
 
     public function user()
     {
@@ -27,6 +29,11 @@ class Form extends Model
         return $this->belongsToMany('App\User', 'form_maintainer', 'form_id', 'users_id')->where('status',1)->whereIn('maintainer_roles_id',[1,2]);
     }
 
+    public function allMaintainer()
+    {
+        return $this->belongsToMany('App\User', 'form_maintainer', 'form_id', 'users_id')->withPivot('maintainer_roles_id');
+    }
+
     public function link(){
         return route('survey.write',[$this->id]);
     }
@@ -34,6 +41,25 @@ class Form extends Model
     public function content()
     {
         return $this->hasMany('App\Model\Form\Content', 'form_id', 'id');
+    }
+
+    public function formUserRole()
+    {
+        return $this->belongsToMany('App\Model\MaintainerRoles', 'form_maintainer', 'form_id', 'maintainer_roles_Id')->where('status',1)->where('users_id',Auth::user()->id);
+    }
+
+    public function getFormUserRoleData(){
+        if($this->formUserRoleData == null){
+            $this->formUserRoleData = $this->formUserRole;
+        }
+        return $this->formUserRoleData;
+    }
+
+    public function userHasRole($role_slug){
+        $this->getFormUserRoleData();
+        foreach ($this->formUserRoleData as $key => $value) {
+            return ($value->slug === $role_slug);
+        }
     }
     
 }

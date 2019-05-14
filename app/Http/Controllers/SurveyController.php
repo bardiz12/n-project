@@ -9,6 +9,8 @@ use App\Model\Form\Column;
 use App\Model\Form\Content;
 use Illuminate\Http\Request;
 use App\Model\Form\ColumnPilgan;
+use App\Model\Form\FormMaintainer;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
@@ -60,9 +62,10 @@ class SurveyController extends Controller
         //check apabila jawaban pilihan ganda tersedia
 
         foreach ($request->input('jawaban') as $key => $value) {
-            //dd(\substr($key,11));
             $id_pilgan = \substr($key,3);
-            $answer[$id_pilgan] = $value;
+            $answer[$id_pilgan] = is_array($value) ? ( array_map(function($v){
+                        return (int) $v;
+                    },$value)) : $value;
             if($types[$id_pilgan] == 'pilgan'){
                 foreach ($value as $id_pilgans) {
                     if(!in_array($id_pilgans,$pilgans_id[$id_pilgan])){
@@ -87,7 +90,7 @@ class SurveyController extends Controller
         return response()->json([
             'status'=>'success',
             'title'=>'Berhasil Menambahkan',
-            'msg'=>'Pilihan jawaban untuk kolom ke-'.($key+1)." tidak ditemukan"
+            'msg'=>"Berhasil Menambahkan"
         ], 200, $headers);   
     }
 
@@ -173,6 +176,49 @@ class SurveyController extends Controller
     public function maintainerIndex($id){
         $data = [];
         $data['form'] = request()->get('theForm');
+        $data['formMaintainer'] = $data['form']->allMaintainer()->paginate(5);
+        //dd($data['form']->allMaintainer);
         return view('account.survey.manage.user',$data);
+    }
+
+    public function maintainerPromotion(Request $request, $id){
+        $headers = [];
+        $form = request()->get('theForm');
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|numeric|exists:users,id',
+            'type'=>'require|string|regex:/^(up|down)$/'
+        ]);
+        $formMaintainer = FormMaintainer::where('form_id',$form->id)->where('users_id',$request->input('id'))->first();
+        if($formMaintainer->maintainer_roles_id === 1){
+            return response()->json([
+                'type'=>'error',
+                'msg'=>'Anda tidak memiliki akses'
+            ], 200, $headers);
+        }
+        //TODO : who can demote an admin?
+        if($formMaintainer !== null){
+            if($request->input('type') === 'up'){
+                $formMaintainer->maintainer_roles_id = 2;
+                $formMaintainer->save();
+                $msg = 'Berhasil menjadikan User sebagai Administrator';
+            }else{
+                $formMaintainer->maintainer_roles_id = 3;
+                $formMaintainer->save();
+                $msg = 'Berhasil menjadikan User sebagai Member';
+            }
+            return response()->json([
+                'type'=>'success',
+                'msg'=>$msg
+            ], 200, $headers);
+        }else{
+            return response()->json([
+                'type'=>'error',
+                'msg'=>'Data tidak tersedia'
+            ], 200, $headers);
+        }
+    }
+
+    public function maintainerAdd(Request $request,$id){
+        
     }
 }
