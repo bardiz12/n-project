@@ -3,6 +3,14 @@
 @section('active_link','profile')
 @section('content_account')
 <div class="card">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+            {!! $chart->container() !!}
+    </div>
+</div>
+<div class="card">
         <div class="card-header"><i class="fa fa-users"></i> Form Maintainer</div>
         <div class="card-body">
         <p class="text-justify"> daftar pengguna yang memiliki akses ke survey <strong>{{$form->name}}</strong></p>
@@ -32,7 +40,7 @@
                 <span>
                     @if($user->id !== \Auth::user()->id)
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-danger btn-remove"><i class="fa fa-trash"></i></button>
                         @if($user->pivot->maintainer_roles_id == 2)
                             <button type="button" class="btn btn-primary btn-promotion" data-id="{{$user->id}}" data-promotion-type="down"><i class="fa fa-arrow-down"></i></button>
                         @else
@@ -54,7 +62,11 @@
     </div>
 @endsection
 
+@push('css-top')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
+@endpush
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script>
         $(document).ready(function(ev){
             $("#btn-add").click(function(e){
@@ -91,6 +103,21 @@
                         }
                     });
                 })
+            });
+            $(document).on('click','.btn-remove',function(e){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Anda ingin menhapus user dari Survey ini?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Delete it!'
+                }).then((result) => {
+                        if(result.value){
+
+                        }
+                    })
             });
             $(document).on('click','.btn-promotion',function(e){
                 let id = $(this).data('id');
@@ -165,4 +192,5 @@
             })
         });
     </script>
+    {!! $chart->script() !!}
 @endpush

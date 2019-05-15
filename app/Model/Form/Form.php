@@ -38,9 +38,13 @@ class Form extends Model
         return route('survey.write',[$this->id]);
     }
 
+    public function mapsLink(){
+        return route('survey.map',[$this->id]);
+    }
+
     public function content()
     {
-        return $this->hasMany('App\Model\Form\Content', 'form_id', 'id');
+        return $this->belongsTo('App\Model\Form\Content', 'form_id', 'id');
     }
 
     public function formUserRole()

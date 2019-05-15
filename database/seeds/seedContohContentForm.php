@@ -39,7 +39,14 @@ class seedContohContentForm extends Seeder
                         }
                     })();
                 }else{
-                    $data[$k->id] = $faker->text(50);
+                    if($k->name == 'nim'){
+                        $data[$k->id] = rand(1111111,9999999);
+                    }else if($k->name == 'nama'){
+                        $data[$k->id] = $faker->name;
+                    }else if($k->name == 'alamat'){
+                        $data[$k->id] = $faker->address;
+                    }
+                    
                 }
             }
             $datas[] = $data;
@@ -48,8 +55,8 @@ class seedContohContentForm extends Seeder
                 'form_id'=>$id_form,
                 'content'=>$data,
                 'users_id'=>1,
-                'long' => $long + (rand(0, 100) / 100.00),
-                'lat' => $lat + (rand(0,100)/100.00)
+                'long' => $long + (rand(0, 20) / 100.00),
+                'lat' => $lat + (rand(0,10)/100.00)
             ]);
             $i++;
         }

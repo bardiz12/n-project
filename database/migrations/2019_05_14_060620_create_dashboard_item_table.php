@@ -15,6 +15,7 @@ class CreateDashboardItemTable extends Migration
     {
         Schema::create('dashboard_item', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
             $table->integer('dashboard_id');
             $table->integer('column_id');
             $table->integer('dashboard_elements_id');

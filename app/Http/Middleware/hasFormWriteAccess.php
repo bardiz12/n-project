@@ -17,7 +17,7 @@ class hasFormWriteAccess
     public function handle($request, Closure $next)
     {
         $form = Form::findOrFail($request->route('id'));
-        
+        $request->attributes->add(['theForm' => $form]);
         return $next($request);
     }
 }

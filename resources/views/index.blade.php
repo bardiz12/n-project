@@ -14,6 +14,7 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">        
         <!--<link rel="manifest" href="/manifest.json">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('css-top')
     <title> @yield('title') </title>
 </head>
 

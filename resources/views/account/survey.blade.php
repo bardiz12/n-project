@@ -26,12 +26,12 @@
                                         <div>
                                                 <a href="{!! $survey->link() !!}" class="card-link text-primary"><i class="fa fa-link"></i></a>
                                                 @if(in_array($survey->pivot->maintainer_roles_id,[1,2]))
-                                                    <a href="#" class="card-link text-warning"><i class="fa fa-map"></i></a>    
+                                                    <a href="{!! $survey->mapsLink() !!}" class="card-link text-warning"><i class="fa fa-map"></i></a>    
                                                     <a href="#" class="card-link text-danger"><i class="fa fa-wrench"></i></a>
                                                     <a href="#" class="card-link text-success"><i class="fa fa-tachometer-alt"></i></a>
                                                 @endif
-                                                @if($survey->pivot->maintainer_roles_id == 1)
-                                                <a href="#" class="card-link text-dark"><i class="fa fa-users"></i></a>
+                                                @if($survey->pivot->maintainer_roles_id == 1 || $survey->pivot->maintainer_roles_id == 1)
+                                            <a href="{{route('account.survey.maintainer.index',[$survey->id])}}" class="card-link text-dark"><i class="fa fa-users"></i></a>
                                                 @endif
                                         </div>
                                     </div>

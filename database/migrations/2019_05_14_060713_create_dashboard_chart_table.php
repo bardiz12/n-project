@@ -17,6 +17,7 @@ class CreateDashboardChartTable extends Migration
             $table->bigIncrements('id');
             $table->string('slug');
             $table->string('name');
+            $table->string('class_name')->nullable();
             $table->string('description');
             $table->boolean('is_active');
             $table->enum('type',['table','map','chart']);

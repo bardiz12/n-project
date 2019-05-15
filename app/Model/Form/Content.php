@@ -23,4 +23,8 @@ class Content extends Model
 
         $a = Content::whereJsonContains('content->6',["5"])->count();
     }
+
+    public function sumarize(){
+        dd($this->form->column);
+    }
 }

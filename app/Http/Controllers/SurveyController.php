@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Helper\Alert;
+use App\Charts\PieChart;
 use App\Model\Form\Form;
 use App\Model\Form\Column;
 use App\Model\Form\Content;
@@ -174,9 +175,16 @@ class SurveyController extends Controller
     }
 
     public function maintainerIndex($id){
+        $chart = new PieChart;
+        $chart->labels(['One', 'Two', 'Three',]);
+        //$dataset = $chart->dataset('My dataset 2', 'line', [5, 2, 10]);
+        $dataset = $chart->dataset('My dataset', 'bar', [5, 2, 90])
+                        ->backgroundColor(collect(['#7158e2','#3ae374', '#ff3838']))
+                        ->color(collect(['#7d5fff','#32ff7e', '#ff4d4d']));
         $data = [];
         $data['form'] = request()->get('theForm');
         $data['formMaintainer'] = $data['form']->allMaintainer()->paginate(5);
+        $data['chart'] = $chart;
         //dd($data['form']->allMaintainer);
         return view('account.survey.manage.user',$data);
     }
@@ -220,5 +228,48 @@ class SurveyController extends Controller
 
     public function maintainerAdd(Request $request,$id){
         
+    }
+
+    public function maps(Request $request, $id){
+        $form = $request->get('theForm');
+        $survey = [];
+        foreach ($form->column as $key => $value) {
+            $survey[$value->id] = [
+                'name'=>$value->name,
+                'is_pilgan'=>$value->isPilganable(),
+                'pilgan'=>$value->isPilganable() ? (function() use ($value){
+                    $d = [];
+                    foreach ($value->pilgan as $k => $pilgan) {
+                        $d[$pilgan->id] = [
+                            'value'=>$pilgan->text
+                        ];
+                    }
+                    return $d;
+                })() : null
+            ];
+
+        }
+        //dd($form->content);
+        $data = $form->content()->where('long','!=',0)->where('lat','!=',0)->get()->map(function($d){
+            return ['author'=>$d->user->name,'long'=>$d->long,'lat'=>$d->lat,'content'=>$d->content];
+        });
+        return view('form.maps.index',['data'=>$data,'survey'=>$survey]);
+    }
+
+    public function maintainerRemove(Request $request,$id){
+        $headers = [];
+        $form = $request->get('theForm');
+        $validateor= Validator::make($request->all(),[
+            'id'=>'numeric|required|exists:users,id',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'type'=>'error',
+                'title'=>'Ada masalah',
+                'html'=>Alert::errorList($validator->error())
+            ], 200, $headers);
+        }else{
+
+        }
     }
 }
