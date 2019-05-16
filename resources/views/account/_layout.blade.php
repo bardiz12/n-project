@@ -11,14 +11,15 @@
                     <i class="fa fa-user"></i> Profile
                 </a>
                 <a href="{{route('account.surveys')}}" id="survey" class="list-group-item list-group-item-action"><i class="fa fa-poll"></i> Survey</a>
-                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-envelope"></i> Invitation</a>
                 <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
             </div>
         </div>
         <div class="col-md-9">
             @yield('content_account')
         </div>
+
+        @yield('content-full')
     </div>
 </div>
 

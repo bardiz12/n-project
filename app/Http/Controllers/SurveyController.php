@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Validator;
 use App\Helper\Alert;
 use App\Charts\PieChart;
@@ -227,7 +228,39 @@ class SurveyController extends Controller
     }
 
     public function maintainerAdd(Request $request,$id){
-        
+        $validator = Validator::make($request->all(),[
+            'email'=>'required|email|exists:users,email',
+            'role'=>'required|numeric|min:2|max:3'
+        ]);
+        $headers = [];
+        if($validator->fails()){
+            return response()->json([
+                'type'=>'error',
+                'html'=>Alert::errorList($validator->errors()),
+                'title'=>'Invitation Error!'
+            ], 200, $headers);
+        }
+        $user = User::where('email',$request->input('email'))->first();
+        if(FormMaintainer::where('form_id',$id)->where('users_id',$user->id)->count() > 0){
+            return response()->json([
+                'type'=>'error',
+                'html'=>'This User has been invited!',
+                'title'=>'Invitation Error'
+            ]);
+        }
+
+        FormMaintainer::create([
+            'form_id'=>$id,
+            'users_id'=>$user->id,
+            'status'=>0,
+            'added_by'=>Auth::user()->id,
+        ]);
+
+        return response()->json([
+            'type'=>'success',
+            'html'=>$user->name." is invited to your survey!",
+            'title'=>'Invitation sent!'
+        ]);
     }
 
     public function maps(Request $request, $id){
@@ -260,7 +293,7 @@ class SurveyController extends Controller
         $headers = [];
         $form = $request->get('theForm');
         $validateor= Validator::make($request->all(),[
-            'id'=>'numeric|required|exists:users,id',
+            'user_id'=>'numeric|required|exists:users,id',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -269,7 +302,15 @@ class SurveyController extends Controller
                 'html'=>Alert::errorList($validator->error())
             ], 200, $headers);
         }else{
-
+            $maintainer = FormMaintainer::where('form_id',$id)->where('users_id',$request->input('user_id'));
+            if($maintainer->count() == 0){
+                return response()->json([
+                    'type'=>'error',
+                    'title'=>'Ada masalah',
+                    'html'=>'User tidak terdaftar pada survey ini']);
+            }
+            $maintainer = $maintainer->first();
+            //if($maintainer->id ==)
         }
     }
 }

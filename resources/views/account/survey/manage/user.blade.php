@@ -3,14 +3,6 @@
 @section('active_link','profile')
 @section('content_account')
 <div class="card">
-    <div class="card-header">
-
-    </div>
-    <div class="card-body">
-            {!! $chart->container() !!}
-    </div>
-</div>
-<div class="card">
         <div class="card-header"><i class="fa fa-users"></i> Form Maintainer</div>
         <div class="card-body">
         <p class="text-justify"> daftar pengguna yang memiliki akses ke survey <strong>{{$form->name}}</strong></p>
@@ -23,6 +15,7 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span id="maintainer-role">
                     {{$user->name}} 
+                    @if($user->pivot->status == 1)
                     @switch($user->pivot->maintainer_roles_id)
                         @case(1)
                                 <span class="badge badge-warning">Creator</span>
@@ -36,15 +29,20 @@
                     @default
                             
                     @endswitch
+                    @else
+                        <span class="badge badge-secondary">Invited</span>
+                    @endif
                 </span>
                 <span>
                     @if($user->id !== \Auth::user()->id)
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-danger btn-remove"><i class="fa fa-trash"></i></button>
-                        @if($user->pivot->maintainer_roles_id == 2)
-                            <button type="button" class="btn btn-primary btn-promotion" data-id="{{$user->id}}" data-promotion-type="down"><i class="fa fa-arrow-down"></i></button>
-                        @else
-                            <button type="button" class="btn btn-warning btn-promotion" data-id="{{$user->id}}" data-promotion-type="up"><i class="fa fa-arrow-up"></i></button>
+                        @if($user->pivot->status == 1)
+                            @if($user->pivot->maintainer_roles_id == 2)
+                                <button type="button" class="btn btn-primary btn-promotion" data-id="{{$user->id}}" data-promotion-type="down"><i class="fa fa-arrow-down"></i></button>
+                            @else
+                                <button type="button" class="btn btn-warning btn-promotion" data-id="{{$user->id}}" data-promotion-type="up"><i class="fa fa-arrow-up"></i></button>
+                            @endif
                         @endif
                       </div>
                       @else
@@ -93,18 +91,27 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
+                    console.log(result);
+                    let email = result.value[0];
+                    let role = result.value[1];
+                    console.log(email,role);
                     $.ajax({
                         type: "POST",
-                        url: "url",
-                        data: "data",
-                        dataType: "dataType",
+                        url: "{{route('account.survey.maintainer.add',[$form->id])}}",
+                        data: {"email":email, "role":role},
+                        dataType: "json",
                         success: function (response) {
-                            
+                            Swal.fire({
+                                'title': response.title,
+                                'html':response.html,
+                                'type':response.type
+                            });
                         }
                     });
                 })
             });
             $(document).on('click','.btn-remove',function(e){
+                let triger = $(this);
                 Swal.fire({
                     title: 'Are you sure?',
                     text: 'Anda ingin menhapus user dari Survey ini?',
@@ -115,7 +122,15 @@
                     confirmButtonText: 'Yes, Delete it!'
                 }).then((result) => {
                         if(result.value){
-
+                            $.ajax({
+                                type: "POST",
+                                url: "url",
+                                data: "data",
+                                dataType: "dataType",
+                                success: function (response) {
+                                    
+                                }
+                            });
                         }
                     })
             });
@@ -192,5 +207,4 @@
             })
         });
     </script>
-    {!! $chart->script() !!}
 @endpush

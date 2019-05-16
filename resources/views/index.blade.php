@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-6">
                         <nav>
-                            <ul>
+                            <!--<ul>
                                 <li>
                                     <a href="#"><i class="fa fa-poll-h "></i> Survey </a>
                                 </li>
@@ -48,18 +48,25 @@
                                 <li>
                                     <a href="#"><i class="fa fa-exclamation-circle "></i>  Issue</a>
                                 </li>
-                            </ul>
+                            </ul>-->
                         </nav>
                     </div>
                     <div class="col-md-3">
                         <nav style="text-align:right;">
                             <ul>
+                            @if(\Auth::check())
+                                <li>
+                                    <a href="{{route('account.index')}}"><i class="fa fa-user"></i> My Account </a>
+                                </li>
+                            @else
                                 <li>
                                     <a href="/register"><i class="fa fa-user-plus"></i> Register </a>
                                 </li>
                                 <li>
                                     <a href="/login"><i class="fa fa-user-lock "></i> Login </a>
                                 </li>
+                            
+                            @endif
                             </ul>
                         </nav>
                     </div>

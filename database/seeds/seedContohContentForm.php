@@ -22,7 +22,8 @@ class seedContohContentForm extends Seeder
         $datas = [];
         $long = 110.40;
         $lat = -7.06;
-        while($i < 20){
+        $total_seed = 200;
+        while($i < $total_seed){
             foreach ($kolom as $je => $k) {
                 if($k->isPilganable()){
                     $jumlah = $k->pilgan()->count();

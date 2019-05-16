@@ -27,12 +27,23 @@
                             <select name="column" class="form-control" id="form-column" required>
                                 <option disabled selected>--</option>
                                 @foreach ($form->column as $i => $c)
-                                    <option value="{{$i}}">{{$c->name}}</option>
+                                    @if($c->isPilganable())
+                                        <option value="{{$i}}">{{$c->name}}</option>
+                                    @endif
                                 @endforeach
+                                
                             </select>
                     </div>
-                    <div id="pilgan-to-select">
-
+                    <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Element Size</label>
+                            <select name="size" class="form-control" id="form-column" required>
+                                <option value="0">Small</option>
+                                <option value="1">Medium</option>
+                                <option value="2">Large</option>
+                            </select>
+                    </div>
+                    <div id="pilgan-to-select" class="row">
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -46,10 +57,35 @@
 
     @push('scripts')
         <script>
+            function addChartElement(chart_id,title,column_id,size_index){
+                $("#report-container").append(`
+                <div class="col-`+sizes[size_index]+`">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span><i class="fa fa-poll"></i> <strong>`+chart_type[chart_id].name+`</strong> Chart</span>
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                              </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    Title : `+title+`<br/>
+                                    Column :  `+form.column[column_id].name+`<br/>
+                                    Size : medium
+                                </div>
+                            </div>
+                        </div>`);
+            }
             $(document).ready(function(ev){
                 $("#add-chart-form").submit(function(e){
                     e.preventDefault();
-                    let data = $(this).serializeArray();
+                    let data = {};
+                    $(this).serializeArray().forEach(element => {
+                        data[element.name] = element.value;
+                    });
+                    addChartElement(data.chart,data.title,data.column,data.size);
                     console.log(data);
                 })
 

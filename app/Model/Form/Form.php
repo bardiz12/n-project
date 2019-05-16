@@ -31,7 +31,7 @@ class Form extends Model
 
     public function allMaintainer()
     {
-        return $this->belongsToMany('App\User', 'form_maintainer', 'form_id', 'users_id')->withPivot('maintainer_roles_id');
+        return $this->belongsToMany('App\User', 'form_maintainer', 'form_id', 'users_id')->withPivot('maintainer_roles_id','status');
     }
 
     public function link(){
