@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <form method="POST" action="{{route('survey.store')}}" data-form-ajax='true' data-reset='true'>
+            <form method="POST" action="{{route('account.survey.store')}}" data-form-ajax='true' data-reset='true'>
                     <fieldset>
                             <div class="card">
                                     <div class="card-header">Buat Survey Baru</div>

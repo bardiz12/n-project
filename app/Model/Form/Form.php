@@ -44,7 +44,7 @@ class Form extends Model
 
     public function content()
     {
-        return $this->belongsTo('App\Model\Form\Content', 'form_id', 'id');
+        return $this->hasOne('App\Model\Form\Content', 'form_id', 'id');
     }
 
     public function formUserRole()

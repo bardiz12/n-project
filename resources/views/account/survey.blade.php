@@ -18,7 +18,8 @@
                                                     {!! $r->badge() !!}
                                                 @endforeach
                                             </div>
-                                            <small class="text-muted">{{$survey->content->count()}} Responden</small>
+                                            
+                                    <small class="text-muted">{{ isset($survey->content) ? $survey->content->count() : '0'}} Responden</small>
                                     </div>
                                     </h6>
                                     <p class="card-text">{{$survey->description}}</p>
