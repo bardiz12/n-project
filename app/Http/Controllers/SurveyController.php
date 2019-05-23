@@ -104,7 +104,7 @@ class SurveyController extends Controller
             'type'=>'array|min:1|required',
             'id'=>'array|min:1|required',
             'pertanyaan'=>'array|min:1|required',
-            'pilihan_jawaban'=>'array|min:1|required'
+            'pilihan_jawaban'=>'array|min:1'
         ]);
 
         
@@ -173,6 +173,20 @@ class SurveyController extends Controller
                 }
             }
         }
+        FormMaintainer::create([
+            'form_id'=>$form->id,
+            'users_id'=>Auth::user()->id,
+            'maintainer_roles_id'=>1,
+            'status'=>1,
+            'added_by'=>Auth::user()->id
+        ]);
+
+        return response()->json([
+            'title'=>'Berhasil',
+            'msg'=>'Survey baru telah dibuat!',
+            'status'=>'success',
+            'redirect_to'=>route('account.surveys')
+        ], 200, $headers);
     }
 
     public function maintainerIndex($id){

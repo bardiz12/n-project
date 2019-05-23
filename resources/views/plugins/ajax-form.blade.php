@@ -48,6 +48,9 @@ $(document).ready(function(ev){
                         html:response.msg,
                         showConfirmButton: true
                     })
+                    if(response.redirect_to != undefined){
+                        $(location).attr('href',response.redirect_to);
+                    }
                 if(dataTable !== undefined){
                     $("table"+dataTable).DataTable().ajax.reload( null, false );
                 }

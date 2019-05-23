@@ -1,6 +1,6 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        
+
         <div class="modal-content">
             <form id="add-chart-form">
                 <div class="modal-header">
@@ -58,8 +58,14 @@
     @push('scripts')
         <script>
             function addChartElement(chart_id,title,column_id,size_index){
+                let ts = Date.now();
                 $("#report-container").append(`
-                <div class="col-`+sizes[size_index]+`">
+                <div class="col-`+sizes[size_index]+` added-chart" id="chart-`+ts+`">
+                            <input type="hidden" name="element[`+ts+`][type]" value="chart" />
+                            <input type="hidden" name="element[`+ts+`][title]" value="`+title+`" />
+                            <input type="hidden" name="element[`+ts+`][column]" value="`+form.column[column_id].id+`" />
+                            <input type="hidden" name="element[`+ts+`][size]" value="`+sizes[size_index]+`" />
+                            
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">

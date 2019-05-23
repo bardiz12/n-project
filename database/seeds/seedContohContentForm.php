@@ -56,8 +56,8 @@ class seedContohContentForm extends Seeder
                 'form_id'=>$id_form,
                 'content'=>$data,
                 'users_id'=>1,
-                'long' => $long + (rand(0, 20) / 100.00),
-                'lat' => $lat + (rand(0,10)/100.00)
+                'long' => $long + ((rand(0, 10) / 100.00) * (rand(0,1) == 1 ? 1 : -1)),
+                'lat' => $lat + (rand(0,1) == 1 ? (rand(0,10)/100.00) : (-1 * (rand(0,20)/100.00)))
             ]);
             $i++;
         }

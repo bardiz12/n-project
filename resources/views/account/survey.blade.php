@@ -3,12 +3,26 @@
 @section('active_link','survey')
 @section('content_account')
 <div class="card">
-        <div class="card-header"><i class="fa fa-poll"></i> Survey</div>
+        <div class="card-header">
+            <span class="d-flex justify-content-between align-items-center">
+                <span><i class="fa fa-poll"></i> Survey</span>
+                <a href="{{route('account.survey.create')}}" class="btn btn-primary">
+                    <span class="d-none d-sm-block" style="display:inherit">
+                            <i class="fa fa-plus"></i>
+                            Create New Survey
+                    </span>
+                    <span class="d-xl-none d-lg-none d-md-none">
+                            <i class="fa fa-plus"></i>
+                            Create
+                    </span>
+                </a>
+            </span>
+        </div>
         <div class="card-body">
             <div class="row">
                 @foreach($surveys as $survey)
                     <div class="col-md-6 col-sm-12">
-                            <div class="card">
+                            <div class="card mt-2">
                                 <div class="card-body">
                                 <h5 class="card-title">{{$survey->name}}</h5>
                                     <h6 class="card-subtitle mb-2">

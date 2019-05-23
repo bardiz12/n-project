@@ -45,7 +45,7 @@ class tableUser extends Seeder
                 'added_by'=>1,
             ]);
         });
-        factory(App\User::class, 20)->create();
+        factory(App\User::class, 20)->create();2
         
         
 
