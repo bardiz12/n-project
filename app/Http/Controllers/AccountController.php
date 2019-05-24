@@ -25,4 +25,17 @@ class AccountController extends Controller
         $data['maintainer_roles'] = $maintainer_roles;
         return view('account.survey',$data);
     }
+
+    public function invitationsIndex(){
+        $data = [];
+        $data['surveys'] = Auth::user()->formAdmin()->paginate(5);
+//        dd($data);
+        $data['warna'] = ['','warning','danger','primary'];
+        $maintainer_roles = [];
+        array_map(function($data) use (&$maintainer_roles){
+            return $maintainer_roles[$data['id']] = $data;
+        }, MaintainerRoles::all()->toArray());
+        $data['maintainer_roles'] = $maintainer_roles;
+        return view('account.invitation',$data);
+    }
 }

@@ -204,6 +204,15 @@ class SurveyController extends Controller
         return view('account.survey.manage.user',$data);
     }
 
+    public function maintainerInvitationIndex($id){
+        $chart = new PieChart;
+        $data = [];
+        $data['form'] = request()->get('theForm');
+        $data['formMaintainer'] = $data['form']->allMaintainer()->paginate(5);
+        //dd($data['form']->allMaintainer);
+        return view('account.survey.manage.user',$data);
+    }
+
     public function maintainerPromotion(Request $request, $id){
         $headers = [];
         $form = request()->get('theForm');
@@ -305,26 +314,31 @@ class SurveyController extends Controller
 
     public function maintainerRemove(Request $request,$id){
         $headers = [];
-        $form = $request->get('theForm');
-        $validateor= Validator::make($request->all(),[
+        $validator= Validator::make($request->all(),[
             'user_id'=>'numeric|required|exists:users,id',
+            'nama'   =>'required'
         ]);
         if($validator->fails()){
             return response()->json([
                 'type'=>'error',
-                'title'=>'Ada masalah',
-                'html'=>Alert::errorList($validator->error())
+                'html'=>Alert::errorList($validator->errors()),
+                'title'=>'Invitation Error!'
             ], 200, $headers);
-        }else{
-            $maintainer = FormMaintainer::where('form_id',$id)->where('users_id',$request->input('user_id'));
-            if($maintainer->count() == 0){
-                return response()->json([
-                    'type'=>'error',
-                    'title'=>'Ada masalah',
-                    'html'=>'User tidak terdaftar pada survey ini']);
-            }
-            $maintainer = $maintainer->first();
-            //if($maintainer->id ==)
         }
+        $user = FormMaintainer::where('form_id',$id)->where('users_id',$request->input('user_id'))->where('added_by',Auth::user()->id);
+        if($user->count() == 0){
+            return response()->json([
+                'type'=>'error',
+                'html'=>'This User not found in survey!!',
+                'title'=>'Invitation Error'
+            ]);
+        }
+        FormMaintainer::where('users_id',$request->input('user_id'))->where('added_by',Auth::user()->id)->delete();
+        return response()->json([
+            'type'=>'success',
+            'html'=>$request->input('nama')." is deleted to your survey!",
+            'title'=>'Invitation sent!'
+        ]);
     }
 }
+    

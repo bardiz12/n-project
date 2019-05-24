@@ -1,6 +1,6 @@
 @extends('account._layout')
 
-@section('active_link','profile')
+@section('active_link','survey')
 @section('content_account')
 <div class="card">
         <div class="card-header"><i class="fa fa-users"></i> Form Maintainer</div>
@@ -36,7 +36,7 @@
                 <span>
                     @if($user->id !== \Auth::user()->id)
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-danger btn-remove"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-danger btn-remove" data-id="{{$user->id}}" data-nama="{{\Auth::user()->name}}"><i class="fa fa-trash"></i></button>
                         @if($user->pivot->status == 1)
                             @if($user->pivot->maintainer_roles_id == 2)
                                 <button type="button" class="btn btn-primary btn-promotion" data-id="{{$user->id}}" data-promotion-type="down"><i class="fa fa-arrow-down"></i></button>
@@ -112,6 +112,8 @@
             });
             $(document).on('click','.btn-remove',function(e){
                 let triger = $(this);
+                let id = $(this).data('id');
+                let nama = $(this).data('nama');
                 Swal.fire({
                     title: 'Are you sure?',
                     text: 'Anda ingin menhapus user dari Survey ini?',
@@ -121,17 +123,19 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, Delete it!'
                 }).then((result) => {
-                        if(result.value){
-                            $.ajax({
-                                type: "POST",
-                                url: "url",
-                                data: "data",
-                                dataType: "dataType",
-                                success: function (response) {
-                                    
-                                }
-                            });
-                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "{{route('account.survey.maintainer.remove',[$form->id])}}",
+                            data: {"user_id": id,"nama" : nama},
+                            dataType: "json",
+                            success: function (response) {
+                                Swal.fire({
+                                    'title': response.title,
+                                    'html':response.html,
+                                    'type':response.type
+                                });   
+                            }
+                        });
                     })
             });
             $(document).on('click','.btn-promotion',function(e){

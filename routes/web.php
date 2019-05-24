@@ -53,4 +53,5 @@ Route::group(['prefix' => 'account','as'=>'account.','middleware'=>['auth']],fun
         });
     });
     Route::get('/surveys','AccountController@surveysIndex')->name('surveys');
+    Route::get('/invitations', 'AccountController@invitationsIndex')->name('invitations');
 });
