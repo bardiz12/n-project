@@ -52,6 +52,10 @@ Route::group(['prefix' => 'account','as'=>'account.','middleware'=>['auth']],fun
             Route::get('/new','SurveyReportController@create')->name('create')->middleware(['formAccess.admin']);
         });
     });
+    Route::group(['prefix' => 'invitation','as'=>'invitation.'], function () {
+        Route::post('/save','InvitationController@store')->name('save');
+        Route::post('/remove','InvitationController@remove')->name('remove');
+    });
     Route::get('/surveys','AccountController@surveysIndex')->name('surveys');
     Route::get('/invitations', 'AccountController@invitationsIndex')->name('invitations');
 });

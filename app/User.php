@@ -47,4 +47,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Model\Form\Form', 'form_maintainer', 'users_id', 'form_id')->where('status',1)->withPivot('maintainer_roles_id', 'status','added_by')->groupBy('form_id');
     }
 
+    public function invitationAdmin()
+    {
+        return $this->belongsToMany('App\Model\Form\Form', 'form_maintainer', 'users_id', 'form_id')->where('status',0)->withPivot('maintainer_roles_id','status','added_by','id')->groupBy('form_id');
+    }
+
 }

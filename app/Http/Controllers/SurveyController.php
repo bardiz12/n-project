@@ -190,22 +190,22 @@ class SurveyController extends Controller
     }
 
     public function maintainerIndex($id){
-        $chart = new PieChart;
-        $chart->labels(['One', 'Two', 'Three',]);
+        //$chart = new PieChart;
+        //$chart->labels(['One', 'Two', 'Three',]);
         //$dataset = $chart->dataset('My dataset 2', 'line', [5, 2, 10]);
-        $dataset = $chart->dataset('My dataset', 'bar', [5, 2, 90])
-                        ->backgroundColor(collect(['#7158e2','#3ae374', '#ff3838']))
-                        ->color(collect(['#7d5fff','#32ff7e', '#ff4d4d']));
+        //$dataset = $chart->dataset('My dataset', 'bar', [5, 2, 90])
+        //                ->backgroundColor(collect(['#7158e2','#3ae374', '#ff3838']))
+        //                ->color(collect(['#7d5fff','#32ff7e', '#ff4d4d']));
         $data = [];
         $data['form'] = request()->get('theForm');
         $data['formMaintainer'] = $data['form']->allMaintainer()->paginate(5);
-        $data['chart'] = $chart;
+        #$data['chart'] = $chart;
         //dd($data['form']->allMaintainer);
-        return view('account.survey.manage.user',$data);
+        #return view('account.survey.manage.user',$data);
+        return json_encode($data);
     }
 
     public function maintainerInvitationIndex($id){
-        $chart = new PieChart;
         $data = [];
         $data['form'] = request()->get('theForm');
         $data['formMaintainer'] = $data['form']->allMaintainer()->paginate(5);
