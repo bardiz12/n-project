@@ -201,8 +201,8 @@ class SurveyController extends Controller
         $data['formMaintainer'] = $data['form']->allMaintainer()->paginate(5);
         #$data['chart'] = $chart;
         //dd($data['form']->allMaintainer);
-        #return view('account.survey.manage.user',$data);
-        return json_encode($data);
+        return view('account.survey.manage.user',$data);
+        #return json_encode($data);
     }
 
     public function maintainerInvitationIndex($id){
