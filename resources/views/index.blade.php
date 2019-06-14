@@ -53,7 +53,18 @@
                     </div>
                     <div class="col-md-3">
                         <nav style="text-align:right;">
-                            <ul>
+                                <div class="dropdown show d-block d-md-none">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <i class=""></i>
+                                        </a>
+                                      
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <a class="dropdown-item" href="#">Action</a>
+                                          <a class="dropdown-item" href="#">Another action</a>
+                                          <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                      </div>
+                            <ul class="d-none d-md-block">
                             @if(\Auth::check())
                                 <li>
                                     <a href="{{route('account.index')}}"><i class="fa fa-user"></i> My Account </a>
@@ -79,6 +90,8 @@
                             
                             @endif
                             </ul>
+
+                            
                         </nav>
                     </div>
                 </div>

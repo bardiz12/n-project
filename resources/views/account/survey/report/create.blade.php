@@ -10,6 +10,7 @@
         <i class="fa fa-tachometer-alt"></i> Create Report Dashboard
     </div>
     <div class="card-body">
+        <form  id="form-title">
         <div class="form-group">
             <label for="report-name">Report dashboard title</label>
             <input type="text" class="form-control" id="report-name" name="name" required>
@@ -18,6 +19,7 @@
             <label for="report-description">Description</label>
             <textarea class="form-control" id="report-description" name="description" required></textarea>
         </div>
+        </form>
     </div>
 </div>
 
@@ -39,9 +41,11 @@
             </div>
             <div class="card mt-2">
                 <div class="card-body" >
+                    <form id="form-content">
                         <div class="row" id="report-container">
 
                         </div>
+                    </form>
                 </div>
             </div>
 </div>
@@ -56,5 +60,8 @@
                 console.log($(this));
             });
         });
+
+        
     </script>
+
 @endpush

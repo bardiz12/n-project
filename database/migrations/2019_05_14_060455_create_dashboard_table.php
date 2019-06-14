@@ -17,6 +17,8 @@ class CreateDashboardTable extends Migration
             $table->bigIncrements('id');
             $table->integer('form_id');
             $table->integer('users_id');
+            $table->string('title');
+            $table->string('description');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
