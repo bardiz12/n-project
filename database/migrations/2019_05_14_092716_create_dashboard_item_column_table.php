@@ -17,7 +17,7 @@ class CreateDashboardItemColumnTable extends Migration
             $table->bigIncrements('id');
             $table->integer('dashboard_item_id');
             $table->integer('form_column_id');
-            $table->json('attribut')->default('{}');
+            $table->json('attribut');
             $table->timestamps();
         });
     }

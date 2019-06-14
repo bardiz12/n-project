@@ -13,7 +13,7 @@ class tableRole extends Seeder
     public function run()
     {
         $roles = [
-            'Administrator',
+            'Administrator'
         ];
 
         array_map(function($role){

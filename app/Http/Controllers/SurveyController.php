@@ -22,7 +22,10 @@ class SurveyController extends Controller
     public function buat(){
         return view("form.buat");
     }
-
+    public function index()
+    {
+        # code...
+    }
     public function write($id){
         $form = Form::find($id);
         return view('form.tulis',['form'=>$form]);

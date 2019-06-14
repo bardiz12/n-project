@@ -58,6 +58,17 @@
                                 <li>
                                     <a href="{{route('account.index')}}"><i class="fa fa-user"></i> My Account </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out-alt"></i> {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
                             @else
                                 <li>
                                     <a href="/register"><i class="fa fa-user-plus"></i> Register </a>

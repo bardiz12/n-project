@@ -43,7 +43,8 @@
                                                 @if(in_array($survey->pivot->maintainer_roles_id,[1,2]))
                                                     <a href="{!! $survey->mapsLink() !!}" class="card-link text-warning"><i class="fa fa-map"></i></a>    
                                                     <a href="#" class="card-link text-danger"><i class="fa fa-wrench"></i></a>
-                                                    <a href="#" class="card-link text-success"><i class="fa fa-tachometer-alt"></i></a>
+                                                    <a href="{{route('account.survey.report.create',$survey->id)}} " class="card-link text-primary"><i class="fa fa-plus"></i></a>
+                                                    <a href="{{route('account.survey.report.index',$survey->id)}} " class="card-link text-success"><i class="fa fa-tachometer-alt"></i></a>
                                                 @endif
                                                 @if($survey->pivot->maintainer_roles_id == 1 || $survey->pivot->maintainer_roles_id == 1)
                                             <a href="{{route('account.survey.maintainer.index',[$survey->id])}}" class="card-link text-dark"><i class="fa fa-users"></i></a>
