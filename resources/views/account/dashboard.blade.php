@@ -5,7 +5,7 @@
 <div class="card">
         <div class="card-header">Dashboard</div>
         <div class="card-body">
-
+            Selamat Datang <b> {{Auth::user()->name}}</b> ! 
         </div>
     </div>
 @endsection

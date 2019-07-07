@@ -12,7 +12,7 @@
                 </a>
                 <a href="{{route('account.surveys')}}" id="survey" class="list-group-item list-group-item-action"><i class="fa fa-poll"></i> Survey</a>
                 <a href="{{route('account.invitations')}}" id="invitation" class="list-group-item list-group-item-action"><i class="fa fa-envelope"></i> Invitation</a>
-                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                <a href="{{route('account.survey_pemilu')}} " id="pemilu" class="list-group-item list-group-item-action"><i class="fa fa-poll-h"></i> Survey Pemilu</a>
             </div>
         </div>
         <div class="col-md-9">

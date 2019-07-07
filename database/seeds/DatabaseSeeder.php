@@ -13,16 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(tableRole::class);
         $this->call(tableUser::class);
-        
         $this->call(tableMaintainerRoles::class);
-
         $this->call(FormTableSeeder::class);
         $this->call(FormColumnTableSeeder::class);
         $this->call(FormColumnPilganTableSeeder::class);
         $this->call(FormContentTableSeeder::class);
-
         $this->call(seedContohContentForm::class);
-
         $this->call(seedDashboardElement::class);
+        $this->call(partaiSeed::class);
+        $this->call(calonDprSeed::class);
     }
 }

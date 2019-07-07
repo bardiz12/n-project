@@ -30,28 +30,11 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <nav>
-                            <!--<ul>
-                                <li>
-                                    <a href="#"><i class="fa fa-poll-h "></i> Survey </a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-map "></i> Maps</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-tachometer-alt "></i>  Dashboard</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-cog "></i> Manage</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-exclamation-circle "></i>  Issue</a>
-                                </li>
-                            </ul>-->
                         </nav>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <nav style="text-align:right;">
                                 <div class="dropdown show d-block d-md-none">
                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,6 +48,9 @@
                                         </div>
                                       </div>
                             <ul class="d-none d-md-block">
+                                    <li>
+                                            <a href="/hasil_pemilu"><i class="fa fa-poll"></i> Hasil Pemilu </a>
+                                    </li>
                             @if(\Auth::check())
                                 <li>
                                     <a href="{{route('account.index')}}"><i class="fa fa-user"></i> My Account </a>
@@ -110,6 +96,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -123,7 +110,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <!--<script src="{{asset('js-r/idb.js')}} "></script>
         <script src="{{asset('js-r/utility.js')}} "></script>-->
-        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>    
         <script>
             $(document).ready(function(){
                 $.ajaxSetup({

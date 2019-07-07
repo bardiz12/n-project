@@ -51,5 +51,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Model\Form\Form', 'form_maintainer', 'users_id', 'form_id')->where('status',0)->withPivot('maintainer_roles_id','status','added_by','id')->groupBy('form_id');
     }
+    public function calon_dpr()
+    {
+        # code...
+        return $this->belongsToMany('App\Model\calonDpr','calon_dpr_user','users_id','calon_dprs_id');
+    }
 
 }

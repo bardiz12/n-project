@@ -45,8 +45,12 @@ class tableUser extends Seeder
                 'added_by'=>1,
             ]);
         });
-        factory(App\User::class, 20)->create();
-        
+        factory(App\User::class, 1000)->create()->each(function($user){
+            $user->calon_dpr()->attach(rand(1,10));
+        });
+        // factory(App\User::class, 200)->create()->each(function ($user) {
+        //     $user->calon_dpr()->attach(rand(0,9));
+        // });
         
 
         

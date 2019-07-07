@@ -17,9 +17,7 @@ Route::get('/', function () {
 Route::get('/tes', function () {
 
 });
-Route::get('/tes2', function () {
-    return view('front.login');
-});
+Route::get('/hasil_pemilu','hasilController@hasil');
 Route::get('/admin', function () {
     return view('layouts.admin');
 });
@@ -58,4 +56,6 @@ Route::group(['prefix' => 'account','as'=>'account.','middleware'=>['auth']],fun
     });
     Route::get('/surveys','AccountController@surveysIndex')->name('surveys');
     Route::get('/invitations', 'AccountController@invitationsIndex')->name('invitations');
+    Route::get('/survey_pemilu', 'AccountController@survey_pemilu')->name('survey_pemilu');
+    Route::post('/survey_pemilu', 'AccountController@pilih_dpr')->name('pilih_dpr');
 });
