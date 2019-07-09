@@ -61,7 +61,7 @@ class hasilController extends Controller
         # code...
         $chart = new pemiluChart;
         $partai = \App\Model\Partai::all();
-//        $chart->labels([]);
+//      $chart->labels([]);
         $nama_partai = collect([]);
         $jumlah_suara = collect([]);
         $faker = Faker::create('id_ID');
@@ -78,6 +78,7 @@ class hasilController extends Controller
             $nama_partai->push($value->nama_partai);
             $jumlah_suara->push($suara);
             $hasil[$key]['nama_partai'] = $value->nama_partai;
+            $hasil[$key]['partai_id'] = $value->id;
             $hasil[$key]['jumlah_suara'] = $suara;
             $warna->push($faker->hexcolor);
         }
@@ -86,9 +87,23 @@ class hasilController extends Controller
         $chart->dataset('ma', 'pie', $jumlah_suara)->backgroundcolor($warna);
         $data['chart'] = $chart;
         $data['hasil'] = $this->sainte_lague($hasil,$this->jumlah_kursi);
-       
+        foreach ($data['hasil'] as $key => $value) {
+            foreach (\App\Model\Partai::where('id',$value['partai_id'])->get() as $keys) {
+                # code...  
+                foreach ($keys->calon_dpr()->get()->sortByDesc(function($calon_dpr){
+                    return $calon_dpr->users()->count();
+                })->take($value['jumlah_kursi']) as $keyss => $valuess) {
+                    # code...
+//                    echo $keys->nama_partai." ".$valuess->nama_calon_dpr." ".count($valuess->users()->get())." <br>";
+                    
+                }
+            }
+        }
+        $data['jumlah_kursi'] = $this->jumlah_kursi;
+        
         return view('hasil-pemilu', $data);
-        //return $partai;
+//        return $data['hasil'];
+//        return $data['calon'];
     }
     
 }
