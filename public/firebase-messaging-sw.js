@@ -1,3 +1,4 @@
+var url = "https://8197b7af.ngrok.io/";
 
 self.addEventListener('push', function(event) {
     console.log('Push Notification received', event.data.text());
@@ -25,8 +26,8 @@ var CACHE_STATIC_NAME = 'static-v8';
 var CACHE_DYNAMIC_NAME = 'dynamic-v8';
 
 var STATIC_FILES = [
-    'https://8197b7af.ngrok.io/manifest.json',
-    'https://8197b7af.ngrok.io/assets/logo/SIM_1.png'
+    url+'manifest.json',
+    url+'assets/logo/SIM_1.png'
 ];
 
 var DYNAMIC_FILES_NOT_SAFE = [
@@ -39,29 +40,29 @@ var DYNAMIC_FILES_NOT_SAFE = [
 ];
 
 var DYNAMIC_NOT_SAFE = [ // link save data
-  'https://8197b7af.ngrok.io/index.php/User/getViewDashboard',
-  'https://8197b7af.ngrok.io/index.php/User/dashboard',
-  'https://8197b7af.ngrok.io/index.php/User/getViewDropbox',
-  'https://8197b7af.ngrok.io/index.php/User/getViewEditProfil',
-  'https://8197b7af.ngrok.io/index.php/User/logout',
-  'https://8197b7af.ngrok.io/index.php/DataUser/saveEditProfil',
-  'https://8197b7af.ngrok.io/index.php/DataUser/getDevice',
-  'https://8197b7af.ngrok.io/index.php/DataUser/offDevice',
-  'https://8197b7af.ngrok.io/index.php/DataUser/deleteUser',
-  'https://8197b7af.ngrok.io/index.php/DataUser/getDataEditUser',
-  'https://8197b7af.ngrok.io/index.php/DataUser/saveEditUser',
-  'https://8197b7af.ngrok.io/index.php/DataUser/inputUser',
-  'https://8197b7af.ngrok.io/index.php/DataUser/saveEditUser',
-  'https://8197b7af.ngrok.io/index.php/DataUser/removeATDevice',
-  'https://8197b7af.ngrok.io/index.php/DataUser/editFingerPrint',
-  'https://8197b7af.ngrok.io/index.php/DataUser/addFingerPrint',
-  'https://8197b7af.ngrok.io/index.php/DataUser/submitUserLogin',
-  'https://8197b7af.ngrok.io/index.php/user/getViewDashboard',
-  'https://8197b7af.ngrok.io/index.php/user/getViewUser',
-  'https://8197b7af.ngrok.io/index.php/user/getViewEditProfil',
-  'https://8197b7af.ngrok.io/index.php/user/getViewDropbox',
-  'https://8197b7af.ngrok.io/index.php/user/logout',
-  'https://8197b7af.ngrok.io/index.php/DataUser/removeFingerPrint'
+  url+'index.php/User/getViewDashboard',
+  url+'index.php/User/dashboard',
+  url+'index.php/User/getViewDropbox',
+  url+'index.php/User/getViewEditProfil',
+  url+'index.php/User/logout',
+  url+'index.php/DataUser/saveEditProfil',
+  url+'index.php/DataUser/getDevice',
+  url+'index.php/DataUser/offDevice',
+  url+'index.php/DataUser/deleteUser',
+  url+'index.php/DataUser/getDataEditUser',
+  url+'index.php/DataUser/saveEditUser',
+  url+'index.php/DataUser/inputUser',
+  url+'index.php/DataUser/saveEditUser',
+  url+'index.php/DataUser/removeATDevice',
+  url+'index.php/DataUser/editFingerPrint',
+  url+'index.php/DataUser/addFingerPrint',
+  url+'index.php/DataUser/submitUserLogin',
+  url+'index.php/user/getViewDashboard',
+  url+'index.php/user/getViewUser',
+  url+'index.php/user/getViewEditProfil',
+  url+'index.php/user/getViewDropbox',
+  url+'index.php/user/logout',
+  url+'index.php/DataUser/removeFingerPrint'
 ];
 
 self.addEventListener('install', function (event) {
