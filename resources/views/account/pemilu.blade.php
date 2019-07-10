@@ -17,7 +17,7 @@
                 <div class="row">
                     @foreach ($calon as $item)
                         
-                    <div class="col-3">
+                    <div class="col-xs-1 col-sm-1 col-md-3">
                         
                             <div class="card" style="margin-top: 15px;">
                                 <label for="pilih{{$item->id}}" style="padding:0;margin:0;">

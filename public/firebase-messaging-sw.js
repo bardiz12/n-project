@@ -25,8 +25,8 @@ var CACHE_STATIC_NAME = 'static-v8';
 var CACHE_DYNAMIC_NAME = 'dynamic-v8';
 
 var STATIC_FILES = [
-    'http://localhost:8000/manifest.json',
-    'http://localhost:8000/assets/logo/SIM_1.png'
+    'https://8197b7af.ngrok.io/manifest.json',
+    'https://8197b7af.ngrok.io/assets/logo/SIM_1.png'
 ];
 
 var DYNAMIC_FILES_NOT_SAFE = [
@@ -39,29 +39,29 @@ var DYNAMIC_FILES_NOT_SAFE = [
 ];
 
 var DYNAMIC_NOT_SAFE = [ // link save data
-  'http://localhost:8000/index.php/User/getViewDashboard',
-  'http://localhost:8000/index.php/User/dashboard',
-  'http://localhost:8000/index.php/User/getViewDropbox',
-  'http://localhost:8000/index.php/User/getViewEditProfil',
-  'http://localhost:8000/index.php/User/logout',
-  'http://localhost:8000/index.php/DataUser/saveEditProfil',
-  'http://localhost:8000/index.php/DataUser/getDevice',
-  'http://localhost:8000/index.php/DataUser/offDevice',
-  'http://localhost:8000/index.php/DataUser/deleteUser',
-  'http://localhost:8000/index.php/DataUser/getDataEditUser',
-  'http://localhost:8000/index.php/DataUser/saveEditUser',
-  'http://localhost:8000/index.php/DataUser/inputUser',
-  'http://localhost:8000/index.php/DataUser/saveEditUser',
-  'http://localhost:8000/index.php/DataUser/removeATDevice',
-  'http://localhost:8000/index.php/DataUser/editFingerPrint',
-  'http://localhost:8000/index.php/DataUser/addFingerPrint',
-  'http://localhost:8000/index.php/DataUser/submitUserLogin',
-  'http://localhost:8000/index.php/user/getViewDashboard',
-  'http://localhost:8000/index.php/user/getViewUser',
-  'http://localhost:8000/index.php/user/getViewEditProfil',
-  'http://localhost:8000/index.php/user/getViewDropbox',
-  'http://localhost:8000/index.php/user/logout',
-  'http://localhost:8000/index.php/DataUser/removeFingerPrint'
+  'https://8197b7af.ngrok.io/index.php/User/getViewDashboard',
+  'https://8197b7af.ngrok.io/index.php/User/dashboard',
+  'https://8197b7af.ngrok.io/index.php/User/getViewDropbox',
+  'https://8197b7af.ngrok.io/index.php/User/getViewEditProfil',
+  'https://8197b7af.ngrok.io/index.php/User/logout',
+  'https://8197b7af.ngrok.io/index.php/DataUser/saveEditProfil',
+  'https://8197b7af.ngrok.io/index.php/DataUser/getDevice',
+  'https://8197b7af.ngrok.io/index.php/DataUser/offDevice',
+  'https://8197b7af.ngrok.io/index.php/DataUser/deleteUser',
+  'https://8197b7af.ngrok.io/index.php/DataUser/getDataEditUser',
+  'https://8197b7af.ngrok.io/index.php/DataUser/saveEditUser',
+  'https://8197b7af.ngrok.io/index.php/DataUser/inputUser',
+  'https://8197b7af.ngrok.io/index.php/DataUser/saveEditUser',
+  'https://8197b7af.ngrok.io/index.php/DataUser/removeATDevice',
+  'https://8197b7af.ngrok.io/index.php/DataUser/editFingerPrint',
+  'https://8197b7af.ngrok.io/index.php/DataUser/addFingerPrint',
+  'https://8197b7af.ngrok.io/index.php/DataUser/submitUserLogin',
+  'https://8197b7af.ngrok.io/index.php/user/getViewDashboard',
+  'https://8197b7af.ngrok.io/index.php/user/getViewUser',
+  'https://8197b7af.ngrok.io/index.php/user/getViewEditProfil',
+  'https://8197b7af.ngrok.io/index.php/user/getViewDropbox',
+  'https://8197b7af.ngrok.io/index.php/user/logout',
+  'https://8197b7af.ngrok.io/index.php/DataUser/removeFingerPrint'
 ];
 
 self.addEventListener('install', function (event) {

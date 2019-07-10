@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('asset/style/style.css')}}">
+    <link rel="stylesheet" href="https://8197b7af.ngrok.io/asset/style/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">        
         <!--<link rel="manifest" href="/manifest.json">-->
@@ -23,18 +23,14 @@
         <section id="header">
             <div class="wrap">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col">
                         <div class="logo">
                             <a href="/">
                                 <h1><i class="fa fa-poll"></i> N-Project</h1>
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <nav>
-                        </nav>
-                    </div>
-                    <div class="col-md-5">
+                    <div class="col" style="margin: auto">
                         <nav style="text-align:right;">
                                 <div class="dropdown show d-block d-md-none">
                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,15 +38,28 @@
                                         </a>
                                       
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                          <a class="dropdown-item" href="#">Action</a>
-                                          <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a>
+                                          <a class="dropdown-item" href="/hasil_pemilu">Hasil Pemilu</a>
+                                          @if(\Auth::check())
+                                                <a class="dropdown-item" href="{{route('account.index')}}">My Account</a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">Log Out</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                           @else  
+                                                <li>
+                                                    <a href="/register"><i class="fa fa-user-plus"></i> Register </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/login"><i class="fa fa-user-lock "></i> Login </a>
+                                                </li>
+                                            @endif
                                         </div>
-                                      </div>
-                            <ul class="d-none d-md-block">
-                                    <li>
-                                            <a href="/hasil_pemilu"><i class="fa fa-poll"></i> Hasil Pemilu </a>
-                                    </li>
+                                </div>
+                            <ul class="d-none d-md-block navbar-cek">
+                                <li>
+                                    <a href="/hasil_pemilu"><i class="fa fa-poll"></i> Hasil Pemilu </a>
+                                </li>
                             @if(\Auth::check())
                                 <li>
                                     <a href="{{route('account.index')}}"><i class="fa fa-user"></i> My Account </a>
@@ -76,14 +85,13 @@
                             
                             @endif
                             </ul>
-
                             
                         </nav>
                     </div>
                 </div>
             </div>
         </section>
-        <div id="contents">
+        <div id="contents" style="min-height: 80vh;">
 
          @yield('content')        
         </div>
@@ -119,11 +127,11 @@
                     }
                 });
             });
-                /*if('serviceWorker' in navigator) {
-                  navigator.serviceWorker
-                           .register('/firebase-messaging-sw.js')
-                           .then(function() { console.log("Service Worker Registered"); });
-                }*/
+        if('serviceWorker' in navigator) {
+          navigator.serviceWorker
+                   .register('/firebase-messaging-sw.js')
+                   .then(function() { console.log("Service Worker Registered"); });
+        }
         </script>
                 
     @stack('scripts')

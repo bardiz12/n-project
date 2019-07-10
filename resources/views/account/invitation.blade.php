@@ -79,7 +79,6 @@
             $(document).on('click','.btn-remove',function(e){
                 let triger = $(this);
                 let id = $(this).data('id');
-                let nama = $(this).data('nama');
                 Swal.fire({
                     title: 'Are you sure?',
                     text: 'Anda ingin menhapus user dari Survey ini?',
@@ -92,7 +91,7 @@
                     $.ajax({
                         type: "POST",
                         url: "{{route('account.invitation.remove')}}",
-                        data: {"user_id": id,"nama" : nama},
+                        data: {"user_id": id},
                         dataType: "json",
                         success: function (response) {
                             Swal.fire({
